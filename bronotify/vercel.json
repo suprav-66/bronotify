@@ -1,6 +1,15 @@
 {
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist",
-    "framework": null
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node",
+        "config": {
+          "zeroConfig": true
+        }
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production"
+    }
   }
   
