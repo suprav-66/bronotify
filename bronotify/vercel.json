@@ -1,15 +1,5 @@
 {
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/node",
-        "config": {
-          "zeroConfig": true
-        }
-      }
-    ],
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
-  
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
