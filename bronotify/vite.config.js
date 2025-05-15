@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
 import react from '@vitejs/plugin-react';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/',  // ✅ for Vercel
+  base: '/', // ✅ ABSOLUTELY MUST BE THIS for Vercel
   plugins: [
     react(),
     VitePWA({
@@ -11,16 +11,15 @@ export default defineConfig({
       manifest: {
         name: 'Bronotify',
         short_name: 'Bronotify',
-        description: 'Task reminder app',
         theme_color: '#ffffff',
         icons: [
           {
-            src: '/vite.svg',  // ✅ correct for Vercel root
+            src: '/vite.svg',
             sizes: '192x192',
-            type: 'image/svg+xml',
-          },
-        ],
-      },
-    }),
-  ],
+            type: 'image/svg+xml'
+          }
+        ]
+      }
+    })
+  ]
 });
