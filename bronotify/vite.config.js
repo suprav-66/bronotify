@@ -3,7 +3,7 @@ import { VitePWA } from 'vite-plugin-pwa';  // Correct named import
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/bronotify/', // This should be set if deploying to a subpath like on GitHub Pages
+  base: '/', // This should be set if deploying to a subpath like on GitHub Pages
  // Update this to your project's base path
   plugins: [
     VitePWA({

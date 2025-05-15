@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTasks } from '../hooks/useTasks';
 import { useSearchParams } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { FaTasks, FaTrash, FaClock } from 'react-icons/fa';
 
 export default function Dashboard() {
   const { tasks, activeList, setActiveList, addTask, toggleDone, deleteTask, reorderTasks } = useTasks();
@@ -9,7 +10,6 @@ export default function Dashboard() {
   const [newTask, setNewTask] = useState('');
   const [taskTime, setTaskTime] = useState('');
 
-  // Sync activeList with URL query param
   useEffect(() => {
     const listFromUrl = searchParams.get('list');
     if (listFromUrl && listFromUrl !== activeList) {
@@ -17,7 +17,6 @@ export default function Dashboard() {
     }
   }, [searchParams, activeList, setActiveList]);
 
-  // Filter and sort tasks by order within active list
   const filteredTasks = tasks
     .filter(task => task.listId === activeList)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -29,7 +28,6 @@ export default function Dashboard() {
     setTaskTime('');
   };
 
-  // Handle drag end event
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -42,10 +40,8 @@ export default function Dashboard() {
 
     const newTasks = tasks.map(task => {
       if (task.listId !== activeList) return task;
-
       const newIndex = listTasks.findIndex(t => t.id === task.id);
       if (newIndex === -1) return task;
-
       return { ...task, order: newIndex };
     });
 
@@ -53,27 +49,30 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex-1 ml-8 bg-white rounded-lg shadow-lg p-6">
-      <h1 className="text-3xl font-bold mb-4">🧠 Tasks</h1>
+    <div className="flex-1 ml-10 bg-white rounded-3xl shadow-2xl p-8 max-w-3xl">
+      <h1 className="text-4xl font-extrabold mb-8 text-pink-600 flex items-center space-x-3">
+        <FaTasks />
+        <span>🧠 Bronotify</span>
+      </h1>
 
-      <div className="flex mb-4">
+      <div className="flex mb-6 space-x-4">
         <input
           type="text"
           placeholder="Add a new task..."
-          className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300 placeholder-gray-400"
+          className="flex-grow p-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-pink-300 placeholder-gray-400 text-lg transition"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') handleAddTask(); }}
         />
         <input
           type="time"
-          className="ml-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300"
+          className="w-32 p-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-4 focus:ring-pink-300 text-lg transition"
           value={taskTime}
           onChange={(e) => setTaskTime(e.target.value)}
         />
         <button
           onClick={handleAddTask}
-          className="ml-2 bg-pink-500 text-white p-2 rounded-lg hover:bg-pink-600"
+          className="bg-pink-500 hover:bg-pink-600 text-white px-7 py-4 rounded-2xl font-bold shadow-lg transition"
         >
           Add
         </button>
@@ -83,47 +82,50 @@ export default function Dashboard() {
         <Droppable droppableId="tasksDroppable">
           {(provided) => (
             <ul
-              className="space-y-2 max-h-96 overflow-y-auto"
+              className="space-y-4 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-pink-400 scrollbar-track-gray-100"
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
               {filteredTasks.length === 0 && (
-                <p className="text-center text-gray-500 mt-4">No tasks yet. Add one above!</p>
+                <p className="text-center text-gray-400 text-lg italic mt-8">No tasks yet. Add one above!</p>
               )}
               {filteredTasks.map((task, index) => (
                 <Draggable key={task.id} draggableId={task.id} index={index}>
                   {(provided, snapshot) => (
                     <li
-                      className={`flex items-center justify-between p-3 rounded-lg shadow-sm
-                        ${task.done ? 'bg-green-200 line-through text-gray-600' : 'bg-gray-100 text-gray-800'}`}
+                      className={`flex items-center justify-between p-5 rounded-3xl shadow-md cursor-pointer transition 
+                        ${task.done ? 'bg-green-100 line-through text-gray-500' : 'bg-pink-50 hover:bg-pink-100'}`}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       style={{
                         ...provided.draggableProps.style,
-                        boxShadow: snapshot.isDragging ? '0 0 10px rgba(0,0,0,0.3)' : 'none',
+                        boxShadow: snapshot.isDragging ? '0 0 15px rgba(219, 39, 119, 0.5)' : 'none',
                       }}
                     >
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-4">
                         <input
                           type="checkbox"
                           checked={task.done}
                           onChange={() => toggleDone(task.id)}
-                          className="w-5 h-5"
+                          className="w-6 h-6 cursor-pointer"
                         />
-                        <span>
-                          {task.text}
+                        <div className="flex flex-col">
+                          <span className="text-lg font-semibold">{task.text}</span>
                           {task.time && (
-                            <span className="ml-2 text-sm text-gray-500">⏰ {task.time}</span>
+                            <span className="flex items-center space-x-2 text-pink-500 font-mono text-sm">
+                              <FaClock />
+                              <span>{task.time}</span>
+                            </span>
                           )}
-                        </span>
+                        </div>
                       </div>
                       <button
                         onClick={() => deleteTask(task.id)}
-                        className="text-red-500 hover:text-red-700 text-lg ml-2"
+                        className="text-red-500 hover:text-red-700 text-2xl transition"
                         aria-label="Delete task"
                       >
-                        ❌
+                        <FaTrash />
                       </button>
                     </li>
                   )}
