@@ -1,1 +1,1 @@
-{"name":"Bronotify","short_name":"Bronotify","description":"Task reminder app","start_url":"/","display":"standalone","background_color":"#ffffff","theme_color":"#ffffff","lang":"en","scope":"/","icons":[{"src":"/bronotify/vite.svg","sizes":"192x192","type":"image/svg+xml"}]}
+{"name":"Bronotify","short_name":"Bronotify","description":"Task reminder app","start_url":"/bronotify/","display":"standalone","background_color":"#ffffff","theme_color":"#ffffff","lang":"en","scope":"/bronotify/","icons":[{"src":"/bronotify/vite.svg","sizes":"192x192","type":"image/svg+xml"}]}
