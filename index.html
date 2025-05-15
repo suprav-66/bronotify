@@ -5,28 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bronotify</title>
 
-    <link rel="manifest" href="/bronotify/manifest.json" />
-    <link rel="icon" type="image/svg+xml" href="/bronotify/vite.svg" />
-    <!-- stylesheet link removed: Vite injects CSS -->
-    <script type="module" crossorigin src="/bronotify/assets/index-CcDdmVG4.js"></script>
-    <link rel="stylesheet" crossorigin href="/bronotify/assets/index-DscjKKw6.css">
-  <link rel="manifest" href="/bronotify/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/bronotify/registerSW.js"></script></head>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- REMOVE THIS: No need to link index.css directly -->
+    <!-- <link rel="stylesheet" href="/bronotify/index.css" /> -->
+    <script type="module" crossorigin src="/assets/index-CE3MvggP.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DscjKKw6.css">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
   <body>
     <div id="root"></div>
 
-    <!-- ✅ FIXED SCRIPT PATH -->
+    <!-- Fix script reference -->
 
-    <!-- ✅ Service Worker setup -->
+    <!-- Register service worker -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/bronotify/sw.js')
-            .then(reg => {
-              console.log('Service Worker registered:', reg.scope);
-            })
-            .catch(err => {
-              console.error('Service Worker registration failed:', err);
-            });
+          navigator.serviceWorker.register('/bronotify/sw.js').then(reg => {
+            console.log('Service Worker registered:', reg.scope);
+          }).catch(err => {
+            console.error('Service Worker registration failed:', err);
+          });
         });
       }
     </script>
