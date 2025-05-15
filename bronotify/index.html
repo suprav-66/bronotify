@@ -6,33 +6,31 @@
     <title>Bronotify</title>
 
     <!-- PWA Manifest -->
-<!-- index.html -->
     <link rel="manifest" href="/manifest.webmanifest" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
 
-    <!-- Remove direct CSS link (handled by Vite) -->
-    <!-- <link rel="stylesheet" href="/index.css" /> -->
+    <!-- Vite-generated CSS and JS will be injected automatically in build -->
+
   </head>
   <body>
-    <!-- Root div for React -->
+    <!-- React root -->
     <div id="root"></div>
 
-    <!-- Main React Entry Script -->
+    <!-- Main React entry -->
     <script type="module" src="/src/index.jsx"></script>
 
-    <!-- Register service worker -->
+    <!-- Service Worker registration -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker
-            .register('/sw.js')  // ✅ No /bronotify prefix for Vercel
-            .then((reg) => {
-              console.log('Service Worker registered:', reg.scope);
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('Service Worker registered with scope:', registration.scope);
             })
-            .catch((err) => {
-              console.error('Service Worker registration failed:', err);
+            .catch(error => {
+              console.error('Service Worker registration failed:', error);
             });
         });
       }
