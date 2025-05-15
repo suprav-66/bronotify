@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';  // Correct named import
+import { VitePWA } from 'vite-plugin-pwa';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/', // This should be set if deploying to a subpath like on GitHub Pages
- // Update this to your project's base path
+  base: '/',  // ✅ for Vercel
   plugins: [
+    react(),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
@@ -15,7 +15,7 @@ export default defineConfig({
         theme_color: '#ffffff',
         icons: [
           {
-            src: '/bronotify/vite.svg',  // Path to icon
+            src: '/vite.svg',  // ✅ correct for Vercel root
             sizes: '192x192',
             type: 'image/svg+xml',
           },
