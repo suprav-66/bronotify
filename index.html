@@ -1,34 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bronotify</title>
-
-    <!-- Manifest and Favicon: relative to /bronotify -->
-    <link rel="manifest" href="/bronotify/manifest.webmanifest" />
-    <link rel="icon" href="/bronotify/vite.svg" type="image/svg+xml" />
-
-    <!-- No CSS/JS links here; Vite injects them during build -->
-  <link rel="manifest" href="/bronotify/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/bronotify/registerSW.js"></script></head>
-  <body>
-    <div id="root"></div>
-
-    <!-- Main JS entry injected by Vite -->
-
-    <!-- Explicit Service Worker registration -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/bronotify/sw.js')
-            .then(registration => {
-              console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-              console.error('Service Worker registration failed:', error);
-            });
-        });
-      }
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bronotify</title>
+  <link rel="manifest" href="/bronotify/manifest.webmanifest" />
+  <link rel="icon" href="/bronotify/vite.svg" />
+  <script type="module" crossorigin src="/bronotify/assets/index-R0aLJArZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/bronotify/assets/index-DscjKKw6.css">
+<link rel="manifest" href="/bronotify/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/bronotify/registerSW.js"></script></head>
+<body>
+  <div id="root"></div>
+</body>
 </html>
