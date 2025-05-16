@@ -2,17 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bronotify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BroNotify</title>
 
-    <!-- Manifest & Favicon -->
+    <!-- Manifest and Favicon -->
     <link rel="manifest" href="/bronotify/manifest.webmanifest" />
-    <link rel="icon" type="image/svg+xml" href="/bronotify/vite.svg" />
+    <link rel="icon" href="/bronotify/vite.svg" />
+
+    <!-- Service Worker Registration -->
+    <script src="/bronotify/registerSW.js"></script>
   <link rel="manifest" href="/bronotify/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/bronotify/registerSW.js"></script></head>
   <body>
     <div id="root"></div>
-
-    <!-- Vite + PWA auto-registers SW -->
-    <script id="vite-plugin-pwa:register-sw" src="/bronotify/registerSW.js"></script>
+    <!-- Vite injects scripts -->
   </body>
 </html>
