@@ -1,21 +1,34 @@
-<!-- public/index.html -->
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bronotify</title>
 
-    <!-- ✅ These must be relative to /bronotify -->
+    <!-- Manifest and Favicon: relative to /bronotify -->
     <link rel="manifest" href="/bronotify/manifest.webmanifest" />
     <link rel="icon" href="/bronotify/vite.svg" type="image/svg+xml" />
 
-    <!-- ✅ Auto injected CSS/JS -->
+    <!-- No CSS/JS links here; Vite injects them during build -->
   <link rel="manifest" href="/bronotify/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/bronotify/registerSW.js"></script></head>
   <body>
     <div id="root"></div>
 
-    <!-- ✅ Required for PWA -->
-    <script id="vite-plugin-pwa:register-sw" src="/bronotify/registerSW.js"></script>
+    <!-- Main JS entry injected by Vite -->
+
+    <!-- Explicit Service Worker registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/bronotify/sw.js')
+            .then(registration => {
+              console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(error => {
+              console.error('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
