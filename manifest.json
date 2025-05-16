@@ -1,15 +1,21 @@
 {
-  "name": "Bronotify",
-  "short_name": "Bronotify",
+  "name": "BroNotify",
+  "short_name": "BroNotify",
+  "description": "Task Reminder PWA",
   "start_url": "/bronotify/",
-  "display": "standalone",
   "background_color": "#ffffff",
+  "display": "standalone",
   "theme_color": "#ec4899",
   "icons": [
     {
-      "src": "/bronotify/vite.svg",
-      "type": "image/svg+xml",
-      "sizes": "192x192"
+      "src": "/bronotify/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/bronotify/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
